@@ -1,34 +1,21 @@
 class Solution {
-    public int[] rearrangeArray(int[] arr) {
-        int[] arr1 = new int[arr.length/2];
-        int[] arr2 = new int[arr.length/2];
-        int a = 0;
-        int b = 0;
-        for(int i = 0  ; i<arr.length ; i++){
-            if(arr[i]>=0){
-                arr1[a] = arr[i];
-                a++;
-            }
-            else{
-                arr2[b] = arr[i];
-                b++;
-            }
-        }
-        int i = 0;
-        int j = 0;
-        int k = 0;
-        while(i<arr1.length && j<arr2.length){
-            if(arr1[i]>=0){
-                arr[k] = arr1[i];
-                i++;
-                k++;
-            }
-            if(arr2[j]<0){
-                arr[k] = arr2[j];
-                j++;
-                k++;
+    public int[] rearrangeArray(int[] nums) {
+        int n = nums.length;
+        int[] result = new int[n];
+        
+        int posIndex = 0;   // even index (0,2,4...)
+        int negIndex = 1;   // odd index (1,3,5...)
+        
+        for(int i = 0; i < n; i++){
+            if(nums[i] > 0){
+                result[posIndex] = nums[i];
+                posIndex += 2;
+            } else {
+                result[negIndex] = nums[i];
+                negIndex += 2;
             }
         }
-        return arr;
+        
+        return result;
     }
 }
