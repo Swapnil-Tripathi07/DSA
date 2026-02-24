@@ -10,7 +10,7 @@ class Solution {
                 break;
             }
             else if(nums[start]<=nums[mid]){
-                if(nums[start]<=target && target<=nums[mid]){
+                if(nums[start]<=target &&nums[mid]>=target){
                     end = mid-1;
                 }
                 else{
@@ -18,7 +18,7 @@ class Solution {
                 }
             }
             else{
-                if(nums[mid]<=target && target<=nums[end]){
+                if(nums[start]>target && nums[mid]<=target){
                     start = mid+1;
                 }
                 else{
