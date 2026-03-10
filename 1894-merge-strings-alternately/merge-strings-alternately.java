@@ -4,7 +4,7 @@ class Solution {
         int i = 0;
         int j = 0;
         while(i<str1.length() && j<str2.length()){
-            merged = merged+ str1.charAt(i)+str2.charAt(i);
+            merged = merged+ str1.charAt(i)+str2.charAt(j);
             i++;
             j++;
         }
