@@ -9,7 +9,7 @@ class Solution {
             }
             else{
                 if(temp<nums[i])
-                miss  = temp;
+                miss = temp;
                 continue;
             }
         }
