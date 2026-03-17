@@ -9,12 +9,8 @@ class Solution {
             int start = timeSeries[i];
             int end = timeSeries[i+1];
             int gap = end-start;
-           
-              if( gap > duration)
-                sum+=duration;
-             else
-                sum+=gap;
-            
+            sum += gap > duration? duration:gap;
+    
         }
         return sum;
     }
