@@ -22,7 +22,7 @@ class Solution {
                     flag = true;
                     break;
                 }
-                s1 = s2;
+                // s1 = s2;
                 j++;
             }
         }
