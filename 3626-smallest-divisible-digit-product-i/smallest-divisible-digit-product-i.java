@@ -1,45 +1,18 @@
 class Solution {
     public int smallestNumber(int n, int t) {
-        int mul = 1;
-        int res = 0;
-        int num = n;
-        if(t==1){
-            res = n;
+        while (product(n) % t != 0) {
+            n++;
         }
-        else{
-            while(n>0){
-                int temp = n%10;
-                mul *= temp;
-                n = n/10;
-            }
-            if(mul%t==0){
-                res = num;
-            }
-            else{
-                mul = 1;
-                num++;
-                n = num;
-            
-                while(mul%t != 0){
-                    while(n>0){
-                        int temp = n%10;
-                        mul *= temp;
-                        n = n/10;
-                    }
-                    if(mul%t==0){
-                        res = num;
-                        break;
-                    }
-                    else{
-                        num++;
-                        n = num;
-                        mul = 1;
-                    }
-                }
-            }
-            
+        return n;
+    }
+
+    private int product(int n) {
+        int p = 1;
+        while (n > 0) {
+            p *= n % 10;
+            n /= 10;
         }
-        return res;
+        return p;
     }
 }
 
