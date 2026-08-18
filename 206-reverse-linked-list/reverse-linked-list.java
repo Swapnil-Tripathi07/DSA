@@ -10,15 +10,16 @@
  */
 class Solution {
     public ListNode reverseList(ListNode head) {
-        ListNode prev = null;
-        ListNode current = head;
-        ListNode neext = null;
-        while(current!=null){
-            neext = current.next;
-            current.next = prev;
-            prev = current;
-            current = neext;
+        if(head == null || head.next == null){
+            return head;
         }
-        return prev;
+        ListNode newHead = reverseList(head.next);
+        head.next.next = head;
+        head.next  = null;
+        return newHead;
     }
 }
+
+// Synced seamlessly with LeetHub Pro
+// Pro features: https://bit.ly/leethubpro | Free version: https://bit.ly/leethubv4
+// Get it here: https://chromewebstore.google.com/detail/bcilpkkbokcopmabingnndookdogmbna
