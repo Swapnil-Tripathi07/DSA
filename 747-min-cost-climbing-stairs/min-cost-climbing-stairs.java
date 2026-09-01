@@ -17,7 +17,9 @@ class Solution {
         if(dp[i] != -1){
             return dp[i];
         }
-        dp[i] = cost[i] + Math.min(solve(cost,i+1,dp),solve(cost,i+2,dp));
+        int one = cost[i] + solve(cost,i+1,dp);
+        int two = cost[i] + solve(cost,i+2,dp);
+        dp[i] = Math.min(one,two);
         return dp[i];
     }
 }
