@@ -11,6 +11,9 @@ class Solution {
 
     }
 
+
+    // This DP stores the total no. of ways to reach at the end
+
     public int numberPath(int[][] dp,int i , int j , int m , int n){
         if(i>m || j>n){
             return 0;
