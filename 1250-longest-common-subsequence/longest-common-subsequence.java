@@ -6,7 +6,7 @@ class Solution {
         for(int i = 0 ; i<s1.length ; i++){
             Arrays.fill(dp[i],-1);
         }
-        return lCSDP(s1,s2,0,0,dp);
+        return lCSTabulation(s1,s2);
     }
 
 
@@ -47,6 +47,38 @@ class Solution {
         dp[i][j] = Math.max(one,two);
         return dp[i][j];
     }
+
+
+
+    // TABULATION
+    public static int lCSTabulation(char[] s1, char[] s2) {
+        int n = s1.length;
+        int m = s2.length;
+
+        // +1 for base-case row and column
+        int[][] dp = new int[n + 1][m + 1];
+
+        // Fill from bottom-right to top-left
+        for (int i = n - 1; i >= 0; i--) {
+            for (int j = m - 1; j >= 0; j--) {
+
+                // Characters are same
+                if (s1[i] == s2[j]) {
+                    dp[i][j] = 1 + dp[i + 1][j + 1];
+                }
+
+                // Characters are different
+                else{
+                    int one = dp[i + 1][j];
+                    int two = dp[i][j + 1];
+                    dp[i][j] = Math.max(one, two);
+                }
+            }
+        }
+        return dp[0][0];
+    }
+
+    
 }
 
 // Synced seamlessly with LeetHub Pro
