@@ -4,6 +4,9 @@ class Solution {
         for(int i = s.length()-1 ; i>=0 ; i--){
             s2 = s2+s.charAt(i);
         }
+
+        //s1 ka reverse karke original s1 ke sath LCS find kar diya, to palindromic hi subsequence hi milega.
+
         int[][] dp =  new int[s.length()][s2.length()];
         for(int i = 0 ; i<s.length() ;i++){
             Arrays.fill(dp[i],-1);
