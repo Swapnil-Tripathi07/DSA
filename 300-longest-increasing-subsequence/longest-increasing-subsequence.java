@@ -12,8 +12,11 @@ class Solution {
         //RECURSION
         // return solve(arr,0,-1);
 
-        //Memoization
-        return solve(arr,0,-1,dp);
+        //MEMOIZATION
+        // return solve(arr,0,-1,dp);
+
+        //TABULATION
+        return solve(arr);
     }
 
     //RECURSION
@@ -39,7 +42,7 @@ class Solution {
             return 0;
         }
 
-        if(dp[i][p+1] != -1){
+        if(dp[i][p+1] != -1){//p = -1 ho sakta hai to isse positive karne ke liye +1 kiya hai.
             return dp[i][p+1];
         }
 
@@ -51,6 +54,36 @@ class Solution {
         int skip = solve(arr,i+1,p,dp);
 
         return dp[i][p+1] = Math.max(take,skip);
+    }
+
+
+    //Tabulation
+    public int solve(int[] arr) {
+
+        int n = arr.length;
+
+        int[][] dp = new int[n + 1][n + 1];
+
+    // i goes from n-1 to 0
+        for (int i = n - 1; i >= 0; i--) {
+
+        // p can be -1, 0, 1, ..., n-1
+        // p+1 => 0, 1, 2, ..., n
+            for (int p = i - 1; p >= -1; p--) {
+
+                int take = 0;
+
+                if (p == -1 || arr[i] > arr[p]) {
+                    take = 1 + dp[i + 1][i + 1];
+                }
+
+                int skip = dp[i + 1][p + 1];
+
+                dp[i][p + 1] = Math.max(take, skip);
+            }
+        }
+
+        return dp[0][0];
     }
 }
 
