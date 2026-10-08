@@ -7,16 +7,16 @@ class Solution {
         int n = nums1.length;
         int m = nums2.length;
 
-        int[][] dp = new int[n + 1][m + 1];
+        int[][] dp = new int[n][m];
 
-        for (int i = 0; i <= n; i++) {
+        for (int i = 0; i < n; i++) {
             Arrays.fill(dp[i], -1);
         }
 
         int ans = 0;
 
-        for (int i = 1; i <= n; i++) {
-            for (int j = 1; j <= m; j++) {
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
 
                 ans = Math.max(ans, solve(nums1, nums2, i, j, dp));
             }
@@ -25,10 +25,9 @@ class Solution {
         return ans;
     }
 
-    public int solve(int[] nums1, int[] nums2,
-                     int i, int j, int[][] dp) {
+    public int solve(int[] nums1, int[] nums2,int i, int j, int[][] dp) {
 
-        if (i == 0 || j == 0) {
+        if (i >= nums1.length || j >= nums2.length) {
             return 0;
         }
 
@@ -36,10 +35,9 @@ class Solution {
             return dp[i][j];
         }
 
-        if (nums1[i - 1] == nums2[j - 1]) {
+        if (nums1[i] == nums2[j]) {
 
-            dp[i][j] = 1 + solve(nums1, nums2,
-                                  i - 1, j - 1, dp);
+            dp[i][j] = 1 + solve(nums1, nums2,i + 1, j + 1, dp);
 
         } else {
 
