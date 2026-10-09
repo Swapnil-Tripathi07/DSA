@@ -1,18 +1,29 @@
+import java.util.*;
+
 class Solution {
     public int lengthOfLongestSubstring(String s) {
-        int res = 0; int left = 0;
-        Map<Character,Integer> map = new HashMap<>();
-        char[] arr = s.toCharArray();
-        int right = 0;
-        for(; right<arr.length ; right++){
-            int index = map.getOrDefault(arr[right],-1);//Storing old index
-            if(index != -1 && index>=left){
-                res = Math.max(res , right-1-left+1);
-                left = index+1;
+        ArrayList<Character> list = new ArrayList<>();
+        int count = 0;
+        int ans = 0;
+
+        for (int i = 0; i < s.length(); i++) {
+            char ch = s.charAt(i);
+
+            while (list.contains(ch)) {
+                list.remove(0);
+                count--;
             }
-            map.put(arr[right],right);
+
+            list.add(ch);
+            count++;
+
+            ans = Math.max(ans, count);
         }
-        res = Math.max(res , right-1-left+1);
-        return res;
+
+        return ans;
     }
 }
+
+// Synced seamlessly with LeetHub Pro
+// Pro features: https://bit.ly/leethubpro | Free version: https://bit.ly/leethubv4
+// Get it here: https://chromewebstore.google.com/detail/bcilpkkbokcopmabingnndookdogmbna
