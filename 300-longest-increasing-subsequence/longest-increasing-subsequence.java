@@ -99,8 +99,8 @@ class Solution {
         
         for(int i = 1; i < n; i++){
             for(int j = 0; j < i; j++){
-                if(nums[j] < nums[i]) {
-                    t[i] = Math.max(t[i], t[j] + 1);
+                if(nums[j] < nums[i] && t[j]+1>t[i]) {
+                    t[i] = t[j]+1;
                     maxLIS = Math.max(maxLIS, t[i]);
                 }
             }
