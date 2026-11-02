@@ -36,7 +36,8 @@ class Solution {
                 return mid;
             }
         }
-        return start;
+        return start;   // ye isliye kara hai kyokin agar element nahi mila to ye uski correct index
+        // return karega ki yahan pe ye element insert hona chahiye.
     }
 }
 
