@@ -1,13 +1,15 @@
 class Solution {
-    public int findCircleNum(int[][] matrix) {
+    public int findCircleNum(int[][] isConnected) {
+        int n = isConnected.length;
         ArrayList<ArrayList<Integer>> adj = new ArrayList<>();
 
-        for (int i = 0; i < matrix.length; i++) {
-            adj.add(new ArrayList<>()); // create list for vertex i
+        for(int i = 0 ; i<n ; i++){
+            adj.add(new ArrayList<Integer>());
 
-            for (int j = 0; j < matrix[i].length; j++) {
-                if (matrix[i][j] == 1) {
+            for(int j = 0 ; j<isConnected[i].length ; j++){
+                if(isConnected[i][j] == 1){
                     adj.get(i).add(j);
+                
                 }
             }
         }
@@ -18,19 +20,30 @@ class Solution {
         for(int i = 0 ; i<V ; i++){
             if(visited[i] == false){
                 count++;
-                dfs(i , adj , visited);
+                bfs(i , adj , visited);
             }
         }
         return count;
+         
     }
 
-    static void dfs(int node , ArrayList<ArrayList<Integer>> adj , boolean[] visited){
-        visited[node] = true;
-        for(Integer i : adj.get(node)){
-            if(visited[i] == false){
-                dfs(i,adj,visited);
+
+    public void bfs(int u , ArrayList<ArrayList<Integer>> adj , boolean[] visited){
+        Queue<Integer> q = new LinkedList<>();
+        q.add(u);
+        visited[u] = true;
+
+        while(!q.isEmpty()){
+            Integer node = q.poll();
+
+            for(Integer i : adj.get(node)){
+                if(!visited[i]){
+                    visited[i] = true;
+                    q.add(i);
+                }
             }
         }
+
     }
 }
 
