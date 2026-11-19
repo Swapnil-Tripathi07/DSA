@@ -1,19 +1,28 @@
 class Solution {
     public int findJudge(int n, int[][] trust) {
-        int[] score = new int[n + 1];
+        if(n==1){
+            return 1;
+        }
+        int[] indegree = new int[n+1];
+        int[] outdegree = new int[n+1];
 
-        for (int[] t : trust) {
-            int a = t[0], b = t[1];
-            score[a]--;
-            score[b]++;
+        for(int[] t : trust){
+            int u = t[0];
+            int v = t[1];
+
+            outdegree[u]++; //u trusts someone
+            indegree[v]++;  //v is trusted by someone
         }
 
-        for (int i = 1; i <= n; i++) {
-            if (score[i] == n - 1) {
+        for(int i = 0 ; i<=n ; i++){
+            if(indegree[i] == n-1 && outdegree[i]==0){
                 return i;
             }
         }
-
         return -1;
     }
 }
+
+// Synced seamlessly with LeetHub Pro
+// Pro features: https://bit.ly/leethubpro | Free version: https://bit.ly/leethubv4
+// Get it here: https://chromewebstore.google.com/detail/bcilpkkbokcopmabingnndookdogmbna
