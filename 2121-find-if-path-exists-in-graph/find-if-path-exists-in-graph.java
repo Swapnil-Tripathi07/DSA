@@ -17,7 +17,8 @@ class Solution {
 
         boolean[] visited = new boolean[n];
 
-        return dfs(source,visited,adj,des);
+        // return dfs(source,visited,adj,des); 
+        return bfs(source,visited,adj,des);
 
     
     }
@@ -33,6 +34,27 @@ class Solution {
                 visited[it] = true;
                 if(dfs(it,visited,adj,des)){
                     return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public boolean bfs(int u , boolean[] visited , ArrayList<ArrayList<Integer>> adj , int des){
+        Queue<Integer> q = new LinkedList<>();
+        q.add(u);
+        visited[u] = true;
+
+        while(!q.isEmpty()){
+            Integer node = q.poll();
+            if(des == node){
+                return true;
+            }
+
+            for(Integer i : adj.get(node)){
+                if(visited[i] == false){
+                    visited[i] = true;
+                    q.add(i);
                 }
             }
         }
