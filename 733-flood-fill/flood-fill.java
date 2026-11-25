@@ -1,10 +1,15 @@
 class Solution {
     public int[][] floodFill(int[][] image, int sr, int sc, int color) {
+        if(image[sr][sc] == color){ // no need to traverse the whole image
+            return image;
+        }
         int n = image.length;
         int m = image[0].length;
         boolean[][] visited = new boolean[n][m];
         int original = image[sr][sc];
+
         dfs(sr,sc,color,visited,image,original);
+        
         return image;
     }
 
@@ -21,10 +26,10 @@ class Solution {
         visited[i][j] = true;
         grid[i][j] = color;
 
-        dfs(i - 1, j,color, visited, grid,ori);     
-        dfs(i, j + 1, color,visited, grid,ori);
-        dfs(i + 1, j,color, visited, grid,ori);
-        dfs(i, j - 1,color, visited, grid,ori);
+        dfs(i - 1, j,color, visited, grid,ori); //up    
+        dfs(i, j + 1, color,visited, grid,ori); //right
+        dfs(i + 1, j,color, visited, grid,ori); //down
+        dfs(i, j - 1,color, visited, grid,ori); //left
     }
 }
 
