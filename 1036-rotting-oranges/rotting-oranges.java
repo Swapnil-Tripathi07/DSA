@@ -1,58 +1,61 @@
-class Pair{
-    int row;
-    int col;
-    int time;
-    Pair(int row , int col , int time){
-        this.row = row;
-        this.col = col;
-        this.time = time;
-    }
-}
 class Solution {
     public int orangesRotting(int[][] grid) {
+
         int n = grid.length;
         int m = grid[0].length;
 
-        Queue<Pair> q = new LinkedList<>();
+        Queue<int[]> q = new LinkedList<>();
 
-        int[][] vis = new int[n][m];
-        int cntFresh = 0;
-        for(int i = 0 ; i<n ; i++){
-            for(int j = 0 ; j<m ; j++){
-                if(grid[i][j] == 2){
-                    q.add(new Pair(i,j,0));
-                    vis[i][j] = 2;
+        int freshOrange = 0;
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                if (grid[i][j] == 2) {
+                    q.add(new int[] { i, j });
+                } else if (grid[i][j] == 1) {
+                    freshOrange++;
                 }
-                else{
-                    vis[i][j] = 0;
-                }
-                if(grid[i][j] == 1) cntFresh++;
             }
         }
 
-        int time = 0;
-        int drow[] = {-1,0,+1,0};
-        int dcol[] = {0,+1,0,-1};
-        int cnt = 0;
-        while(!q.isEmpty()){
-            int r = q.peek().row;
-            int c = q.peek().col;
-            int t = q.peek().time;
-            time = Math.max(time,t);
-            q.remove();
-            for(int i = 0 ; i<4 ; i++){
-                int nrow = r + drow[i];
-                int ncol = c + dcol[i];
-                if(nrow>=0 && nrow<n && ncol>=0 && ncol<m && vis[nrow][ncol]==0 && grid[nrow][ncol] == 1){
-                    q.add(new Pair(nrow,ncol,time+1));
-                    vis[nrow][ncol] = 2;
-                    cnt++;
+        if(freshOrange == 0){
+            return 0;
+        }
+
+        int minutes = 0;
+
+        int[] dirX = { -1, 0, 1, 0 };
+        int[] dirY = { 0, 1, 0, -1 };
+
+        while (!q.isEmpty()) {
+            int size = q.size();
+
+            while (size-- > 0) {
+                int[] pair = q.poll();
+                int a = pair[0];
+                int b = pair[1];
+
+                for (int k = 0; k < 4; k++) {
+                    int newX = a + dirX[k];
+                    int newY = b + dirY[k];
+
+                    if (newX >= 0 && newX < n && newY >= 0 && newY < m && grid[newX][newY] == 1) {
+                        grid[newX][newY] = 2;
+                        freshOrange--;
+                        q.add(new int[] { newX, newY });
+                    }
                 }
             }
+            minutes++;
         }
-        if(cnt != cntFresh) return -1;
-        return time;
+
+        if (freshOrange == 0) {
+            return minutes - 1;
+        } else {
+            return -1;
+        }
     }
+
 }
 
 // Synced seamlessly with LeetHub Pro
